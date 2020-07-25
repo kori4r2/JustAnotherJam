@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Movable), typeof(Rigidbody2D))]
+[RequireComponent(typeof(Movable), typeof(Rigidbody2D), typeof(Collider2D))]
 public abstract class UnitController : MonoBehaviour, IDamageable
 {
-    protected const int baseAttack = 50;
+    protected const int baseDamage = 50;
     protected const int baseHP = 100;
     protected const int baseSpeed = 10;
 
     public int MaxHP { get; protected set; } = baseHP;
     public int CurHP { get; protected set; } = baseHP;
-    public int Attack { get; protected set; } = baseAttack;
+    public int Damage { get; protected set; } = baseDamage;
     private int speed = baseSpeed;
     public int Speed {
         get => speed;
@@ -21,13 +21,17 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         }
     }
 
+    protected Collider2D col;
     protected Movable movable;
+    public Vector2 Direction { get => movable.Direction; }
+    public bool CanMove { get => movable.CanMove; set => movable.CanMove = value; }
     [SerializeField] protected Armor armor;
     [SerializeField] protected Arms arms;
     [SerializeField] protected Shoes shoes;
 
     public virtual void Equip(Armor newArmor){
-        Attack = Mathf.FloorToInt(baseAttack * newArmor.AttackModifier);
+        armor = newArmor;
+        Damage = Mathf.FloorToInt(baseDamage * newArmor.DamageModifier);
         Speed = Mathf.FloorToInt(baseSpeed * newArmor.SpeedModifier);
         float hpPercentage = MaxHP / (1.0f * CurHP);
         MaxHP = Mathf.FloorToInt(baseHP * newArmor.HealthModifier);
@@ -45,8 +49,8 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         // Muda o sprite aqui
     }
 
-    public virtual void Damage(UnitController attacker){
-        CurHP -= attacker.Attack;
+    public virtual void TakeDamage(UnitController attacker){
+        CurHP -= attacker.Damage;
         if(CurHP <= 0){
             Die();
         }
@@ -56,8 +60,15 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-    void Awake()
+    public void Attack(){
+        // Causa dando de acordo com a arma
+        // A posicão do atacante está em transform.position
+        // A direção do ataque está em movable.Direction
+    }
+
+    protected void Awake()
     {
+        col = GetComponent<Collider2D>();
         movable = GetComponent<Movable>();
     }
 

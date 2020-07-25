@@ -6,17 +6,24 @@ using UnityEngine;
 public class EnemyController : UnitController
 {
 	public Enemy so;
-	[SerializeField] private bool killable;
+	[SerializeField] private bool killable = true;
 	public bool Killable { get => killable; }
 
-	public override void Damage(UnitController attacker){
+	public override void TakeDamage(UnitController attacker){
 		if(killable){
-			base.Damage(attacker);
+			base.TakeDamage(attacker);
 		}
 	}
 
 	protected override void Die(){
 		so.Kill();
 		base.Die();
+	}
+
+	void OnCollisionEnter2D(Collision2D collision){
+		if(collision.gameObject.tag == "Player"){
+			PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+			player.TakeDamage(this);
+		}
 	}
 }

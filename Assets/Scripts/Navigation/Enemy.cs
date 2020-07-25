@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : ScriptableObject
 {
-    [SerializeField] private GameObject prefab;
+    [SerializeField] private GameObject prefab = null;
     public Vector2 spawnPosition;
     public bool Alive { get; private set; }
     private EnemyController controller;

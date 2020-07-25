@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class RoomObject : MonoBehaviour
+public abstract class RoomObject : ScriptableObject
 {
     [SerializeField] protected GameObject prefab;
     protected GameObject obj;

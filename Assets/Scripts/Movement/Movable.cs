@@ -20,9 +20,16 @@ public class Movable : MonoBehaviour {
 		set {
 			if(value != canMove)
 				rigid2D.velocity = Vector2.zero;
+
 			canMove = value;
+
+			if(canMove)
+				nextPosition?.Activate();
+			else
+				nextPosition?.Deactivate();
 		}
 	}
+	public Vector2 Direction{ get; private set; }
 	private Rigidbody2D rigid2D;
 	private Animator anim;
 
@@ -42,7 +49,6 @@ public class Movable : MonoBehaviour {
 
 	// Salva a referencia para o rigdigbody
 	void Awake(){
-		//canMove = true;
 		rigid2D = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
 	}
@@ -61,9 +67,11 @@ public class Movable : MonoBehaviour {
 			if(Mathf.Abs(rigid2D.velocity.x) - Mathf.Abs(rigid2D.velocity.y) > Mathf.Epsilon){
 				anim.SetFloat("directionY", 0f);
 				anim.SetFloat("directionX", rigid2D.velocity.normalized.x);
+				Direction = new Vector2((rigid2D.velocity.x > float.Epsilon)? 1 : (rigid2D.velocity.x < -float.Epsilon)? -1 : 0 , 0);
 			}else if(Mathf.Abs(rigid2D.velocity.y) - Mathf.Abs(rigid2D.velocity.x) > Mathf.Epsilon){
 				anim.SetFloat("directionX", 0f);
 				anim.SetFloat("directionY", rigid2D.velocity.normalized.y);
+				Direction = new Vector2(0, (rigid2D.velocity.y > float.Epsilon)? 1 : (rigid2D.velocity.y < -float.Epsilon)? -1 : 0);
 			}
 		}
 	}
