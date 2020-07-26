@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Movable), typeof(Rigidbody2D), typeof(Collider2D))]
+[RequireComponent(typeof(Animator))]
 public abstract class UnitController : MonoBehaviour, IDamageable
 {
     protected const int baseDamage = 50;
@@ -23,11 +24,16 @@ public abstract class UnitController : MonoBehaviour, IDamageable
 
     protected Collider2D col;
     protected Movable movable;
+    protected Animator anim;
     public Vector2 Direction { get => movable.Direction; }
     public bool CanMove { get => movable.CanMove; set => movable.CanMove = value; }
+    [SerializeField, Range(0f, 5f)] protected float invulnerableTime = 1f;
     [SerializeField] protected Armor armor;
     [SerializeField] protected Arms arms;
     [SerializeField] protected Shoes shoes;
+    private AttackTrigger atkTrigger = null;
+    private float timer = 0f;
+    private bool invulnerable = false;
 
     public virtual void Equip(Armor newArmor){
         armor = newArmor;
@@ -42,6 +48,10 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     public virtual void Equip(Arms newArms){
         arms = newArms;
         // Muda o sprite aqui
+        if(atkTrigger){
+            Destroy(atkTrigger.gameObject);
+            atkTrigger = arms.AddTrigger(transform);
+        }
     }
 
     public virtual void Equip(Shoes newShoes){
@@ -53,6 +63,9 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         CurHP -= attacker.Damage;
         if(CurHP <= 0){
             Die();
+        }else{
+            timer = invulnerableTime;
+            invulnerable = true;
         }
     }
 
@@ -60,16 +73,39 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
+    protected void StartAttack(){
+        CanMove = false;
+        atkTrigger?.PrepareAttack(this);
+        // TO DO: ativar o trigger de animação
+    }
+
+    // Função que deve ser chamada como evento de animação
     public void Attack(){
-        // Causa dando de acordo com a arma
-        // A posicão do atacante está em transform.position
-        // A direção do ataque está em movable.Direction
+        // Causa dano de acordo com a arma
+        atkTrigger?.Attack();
+    }
+
+    // Função que deve ser chamada como evento de animação
+    public void EndAttack(){
+        atkTrigger?.EndAttack();
+        CanMove = true;
     }
 
     protected void Awake()
     {
         col = GetComponent<Collider2D>();
         movable = GetComponent<Movable>();
+        anim = GetComponent<Animator>();
+    }
+
+    public void Update(){
+        if(invulnerable){
+            timer -= Time.deltaTime;
+            if(timer <= 0){
+                timer = 0f;
+                invulnerable = false;
+            }
+        }
     }
 
     void Start(){

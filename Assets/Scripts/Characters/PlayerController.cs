@@ -17,6 +17,7 @@ public class PlayerController : UnitController
     [SerializeField] private Navigator navigator = null;
 
     public void StartGame(){
+        gameObject.tag = "Player";
         CanMove = true;
     }
 
@@ -62,5 +63,13 @@ public class PlayerController : UnitController
             }
         }
         CurRace = Race.Slime;
+    }
+
+    public new void Update(){
+        base.Update();
+        // yes, it's jump, shut up
+        if(CanMove && Input.GetButton("Jump")){
+            StartAttack();
+        }
     }
 }

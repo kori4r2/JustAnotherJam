@@ -9,6 +9,11 @@ public class EnemyController : UnitController
 	[SerializeField] private bool killable = true;
 	public bool Killable { get => killable; }
 
+	new void Awake(){
+		base.Awake();
+		gameObject.tag = "Enemy";
+	}
+
 	public override void TakeDamage(UnitController attacker){
 		if(killable){
 			base.TakeDamage(attacker);
