@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Warhammer
   m_EditorClassIdentifier: 
   racialTrait: 3
-  damagePrefab: {fileID: 4079294270081440509, guid: 3e602633a8af4ad49909bc0f975ccba3,
+  damagePrefab: {fileID: 4079294270081440509, guid: 56f4ed162489cc84185bf1e47b4b08da,
     type: 3}
