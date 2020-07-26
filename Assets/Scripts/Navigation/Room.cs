@@ -13,7 +13,7 @@ public enum DoorPosition{
 public class Room : ScriptableObject
 {
     public const int size = 50;
-    private List<Enemy> enemies = new List<Enemy>();
+    public List<Enemy> enemies = new List<Enemy>();
     private GameObject roomObj;
 
     public RoomObject northObject;

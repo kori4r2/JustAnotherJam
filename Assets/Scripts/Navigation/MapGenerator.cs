@@ -38,6 +38,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject lastRoom = null;
     [SerializeField] private List<GameObject> roomPrefabs = new List<GameObject>();
     [SerializeField] private Door door = null;
+    [SerializeField] private List<Enemy> enemies = new List<Enemy>();
     [SerializeField] private RoomObject slimeItem = null;
     [SerializeField] private RoomObject humanItem = null;
     [SerializeField] private RoomObject elfItem = null;
@@ -133,6 +134,14 @@ public class MapGenerator : MonoBehaviour
                 // Se for a ultima sala não precisa criar uma saída ou colocar itens
                 curID++;
                 if(curID < nRooms){
+                    // Adiciona os inimigos
+                    for(int i = 0; i < 3; i++){
+                        Enemy newEnemy = Instantiate(enemies[Random.Range(0, enemies.Count)]);
+                        if(newEnemy != null){
+                            newEnemy.spawnPosition = new Vector3(-5 + (i * 5), 0, 0);
+                            map[curPos].SO.enemies.Add(newEnemy);
+                        }
+                    }
                     // TO DO calcula a chance e coloca um item em um dos espaços vazios
 
                     // Seleciona a posição da saída na sala atual

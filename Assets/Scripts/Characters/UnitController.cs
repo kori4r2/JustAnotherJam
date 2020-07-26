@@ -32,7 +32,7 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     protected Collider2D col;
     protected Movable movable;
     protected Animator anim;
-    public Vector2 Direction { get => movable.Direction; }
+    public virtual Vector2 Direction { get => movable.Direction; }
     public bool CanMove { get => movable.CanMove; set => movable.CanMove = value; }
     [SerializeField, Range(0f, 5f)] protected float invulnerableTime = 1f;
     [SerializeField] private RaceSelector raceSelector;

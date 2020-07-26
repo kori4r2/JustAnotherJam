@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(MoveToInput))]
 public class PlayerController : UnitController
 {
+    public static PlayerController Instance { get; private set; } = null;
+
     public Race CurRace { get; private set; } = Race.Slime;
     private Dictionary<Race, int> racialScores;
     [SerializeField] private Navigator navigator = null;
@@ -15,16 +17,29 @@ public class PlayerController : UnitController
     }
 
     new void Awake(){
-        base.Awake();
-        racialScores = new Dictionary<Race, int>();
-        racialScores.Add(Race.Slime, 3);
-        racialScores.Add(Race.Elf, 0);
-        racialScores.Add(Race.Human, 0);
-        racialScores.Add(Race.Orc, 0);
-        CurRace = Race.Slime;
-        navigator.Player = this;
-        movable.NextPosition = GetComponent<MoveToInput>();
-        CanMove = false;
+        if(Instance == null){
+            Instance = this;
+
+            base.Awake();
+            racialScores = new Dictionary<Race, int>();
+            racialScores.Add(Race.Slime, 3);
+            racialScores.Add(Race.Elf, 0);
+            racialScores.Add(Race.Human, 0);
+            racialScores.Add(Race.Orc, 0);
+            CurRace = Race.Slime;
+            navigator.Player = this;
+            movable.NextPosition = GetComponent<MoveToInput>();
+            CanMove = false;
+        }else{
+            Debug.Log("Tentou instanciar mais de um PlayerController");
+            Destroy(gameObject);
+        }
+    }
+
+    public void OnDestroy(){
+        if(Instance == this){
+            Instance = null;
+        }
     }
 
     public override void Equip(Armor newArmor){
