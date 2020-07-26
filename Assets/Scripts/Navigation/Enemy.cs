@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Enemy", menuName = "Enemy")]
 public class Enemy : ScriptableObject
 {
     [SerializeField] private GameObject prefab = null;
