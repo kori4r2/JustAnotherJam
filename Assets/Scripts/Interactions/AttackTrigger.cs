@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CompositeCollider2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(CompositeCollider2D))]
 public class AttackTrigger : MonoBehaviour
 {
+    [SerializeField]
     private SpriteRenderer sr = null;
     private List<Collider2D> colliders = new List<Collider2D>();
     private UnitController unit = null;
@@ -13,7 +14,7 @@ public class AttackTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
+        if(sr == null)sr = GetComponent<SpriteRenderer>();
         sr.enabled = false;
         colliders.AddRange(GetComponents<Collider2D>());
         colliders.Remove(GetComponent<CompositeCollider2D>());
