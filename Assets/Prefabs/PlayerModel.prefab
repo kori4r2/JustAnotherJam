@@ -28,6 +28,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelTransform: {fileID: 497679980278570303}
+  pivotTransform: {fileID: 5978650732991635709}
+  modelRoot: {fileID: 497679980278570245}
+  modelHead: {fileID: 497679980278570349}
   partsReferences:
   - boots: {fileID: 0}
     armor: {fileID: 0}
@@ -327,7 +330,7 @@ PrefabInstance:
     - target: {fileID: 13700008, guid: 7bb8f6e7278eb2d42b2d25f86bdfc496, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 313281d66d797834fadeff0395f100d5, type: 2}
+      objectReference: {fileID: 2100000, guid: 367993e0035cd9c4e897fd189924f160, type: 2}
     - target: {fileID: 400154, guid: 7bb8f6e7278eb2d42b2d25f86bdfc496, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.000001975266
@@ -1233,6 +1236,18 @@ Transform:
 --- !u!95 &497679980285997719 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 7bb8f6e7278eb2d42b2d25f86bdfc496,
+    type: 3}
+  m_PrefabInstance: {fileID: 497679980278695927}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &497679980278570245 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400114, guid: 7bb8f6e7278eb2d42b2d25f86bdfc496,
+    type: 3}
+  m_PrefabInstance: {fileID: 497679980278695927}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &497679980278570349 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400026, guid: 7bb8f6e7278eb2d42b2d25f86bdfc496,
     type: 3}
   m_PrefabInstance: {fileID: 497679980278695927}
   m_PrefabAsset: {fileID: 0}
