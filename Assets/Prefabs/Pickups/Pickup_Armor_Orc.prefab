@@ -127,5 +127,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 313281d66d797834fadeff0395f100d5, type: 2}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: typeEquip
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: armorEquip
+      value: 
+      objectReference: {fileID: 11400000, guid: 917a79c63aaa1d94cada9bb67517d80c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c95679025b93b2545821d2e58d33891b, type: 3}

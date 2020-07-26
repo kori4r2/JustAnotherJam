@@ -77,5 +77,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 367993e0035cd9c4e897fd189924f160, type: 2}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: shoesEquip
+      value: 
+      objectReference: {fileID: 11400000, guid: c38d15410c8b6b64da1e3dd4bc81ce7e,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c95679025b93b2545821d2e58d33891b, type: 3}

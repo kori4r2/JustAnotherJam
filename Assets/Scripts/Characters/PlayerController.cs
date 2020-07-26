@@ -65,4 +65,14 @@ public class PlayerController : UnitController
             StartAttack();
         }
     }
+
+    public void CurePlayer(float percent)
+    {
+        float curPercent = CurHP / MaxHP;
+        curPercent += percent;
+
+        curPercent = Mathf.Clamp01(curPercent);
+
+        CurHP = Mathf.Max(Mathf.FloorToInt(curPercent * MaxHP), 1);
+    }
 }
