@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Events;
 
 public enum Race{
     Slime = 0,
@@ -43,6 +44,10 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     private float timer = 0f;
     private bool invulnerable = false;
     private bool attacking = false;
+
+    public delegate void HealthCallback(float percentHealth);
+
+    public HealthCallback OnHealthChange = null;
 
     public virtual void Equip(Armor newArmor){
         armor = newArmor;
@@ -147,5 +152,12 @@ public abstract class UnitController : MonoBehaviour, IDamageable
             raceSelector.onExecuteAttack.AddListener(Attack);
             raceSelector.onFinishedAttack.AddListener(EndAttack);
         }
+    }
+
+    void CallUpdateHealth()
+    {
+        float hpPercentage = MaxHP / (1.0f * CurHP);
+        if(OnHealthChange != null)
+            OnHealthChange(hpPercentage);
     }
 }

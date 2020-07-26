@@ -21,6 +21,14 @@ public class RaceSelector : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private Transform modelTransform;
+    
+    [SerializeField]
+    private Transform pivotTransform;
+
+    [SerializeField]
+    private Transform modelRoot;
+    [SerializeField]
+    private Transform modelHead;
 
     [SerializeField]
     private PartsReferences[] partsReferences;
@@ -60,11 +68,17 @@ public class RaceSelector : MonoBehaviour
     private int currentBody = 0;
     private int currentArms = 0;
 
+    private float defaultPositionY;
+    private float defaultBonePositionY;
+
     void Awake()
     {
         if(animator == null)
             animator = GetComponentInChildren<Animator>();
         
+        defaultPositionY = modelTransform.localPosition.y;
+        Debug.Log(defaultBonePositionY);
+
         foreach (var item in partsReferences)
         {
             if(item.boots)
@@ -99,6 +113,7 @@ public class RaceSelector : MonoBehaviour
 
         animator.SetInteger("ArmSelect",currentArms);
         
+        CallUpdateCenter();
         UpdateHead();
     }
 
@@ -116,6 +131,7 @@ public class RaceSelector : MonoBehaviour
 
         animator.SetInteger("BodySelect", currentBody);
         
+        CallUpdateCenter();
         UpdateHead();
     }
 
@@ -133,6 +149,7 @@ public class RaceSelector : MonoBehaviour
 
         animator.SetInteger("LegSelect", currentLegs);
         
+        CallUpdateCenter();
         UpdateHead();
     }
 
@@ -168,6 +185,32 @@ public class RaceSelector : MonoBehaviour
         if(onFinishedAttack != null)
             onFinishedAttack.Invoke();
         Debug.Log("Finish");
+    }
+
+    Coroutine updateCoroutine = null;
+    //Move the model so that the center of the character is at local 0
+    private void CallUpdateCenter()
+    {
+        if(updateCoroutine != null)
+            StopCoroutine(updateCoroutine);
+
+        updateCoroutine = StartCoroutine(UpdateCenter());
+    }
+//-5.960464e-08
+    private IEnumerator UpdateCenter()
+    {
+        float counter = 0, difference;
+
+        while(counter < 0.5f)
+        {
+            difference = FindLocalMiddlePoint() - 0.6881673f;
+            modelTransform.localPosition = new Vector3(modelTransform.localPosition.x, defaultPositionY - difference ,modelTransform.localPosition.z);
+            counter += Time.deltaTime;
+            yield return null;
+        }
+
+        difference = FindLocalMiddlePoint() - 0.6881673f;
+        modelTransform.localPosition = new Vector3(modelTransform.localPosition.x, defaultPositionY - difference ,modelTransform.localPosition.z);
     }
 
 
@@ -206,6 +249,14 @@ public class RaceSelector : MonoBehaviour
 
     }
 
+    private float FindLocalMiddlePoint()
+    {
+        Vector3 localHead = modelTransform.InverseTransformPoint(modelHead.position);
+        Vector3 localRoot = modelTransform.InverseTransformPoint(modelRoot.position);
+
+        return 0.5f * (localHead.y + localRoot.y);
+    }
+
     #if UNITY_EDITOR
 
     [MenuItem("Debug/Setup Human")]
@@ -236,6 +287,24 @@ public class RaceSelector : MonoBehaviour
         rc.SetArms(Race.Orc);
         rc.SetBody(Race.Orc);
         rc.SetLegs(Race.Orc);
+    }
+
+    [MenuItem("Debug/Tell me why")]
+    public static void FindHeight()
+    {
+        RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
+
+        Debug.Log(rc.FindLocalMiddlePoint());
+    }
+
+    [MenuItem("Debug/Setup Slime")]
+    public static void SetupSlime()
+    {
+        RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
+
+        rc.SetArms(Race.Slime);
+        rc.SetBody(Race.Slime);
+        rc.SetLegs(Race.Slime);
     }
 
     #endif
