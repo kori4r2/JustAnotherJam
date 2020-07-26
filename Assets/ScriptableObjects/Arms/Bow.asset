@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   racialTrait: 2
-  damagePrefab: {fileID: 4079294270081440509, guid: 3e602633a8af4ad49909bc0f975ccba3,
+  damagePrefab: {fileID: 4079294270081440509, guid: 7a963291317698944a071b358b6e213c,
     type: 3}
