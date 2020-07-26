@@ -29,14 +29,15 @@ public class Movable : MonoBehaviour {
 				nextPosition?.Deactivate();
 		}
 	}
-	public Vector2 Direction{ get; private set; }
+	public Vector2 Direction{ get; private set; } = Vector2.down;
+	public Vector2 CurrentSpeed { get => rigid2D?.velocity ?? Vector2.zero; }
 	private Rigidbody2D rigid2D;
 	private Animator anim;
 
 	public void Reset(){
 		moveSpeed = 5f;
 		Rigidbody2D rb2D = GetComponent<Rigidbody2D>();
-		rb2D.bodyType = RigidbodyType2D.Kinematic;
+		rb2D.bodyType = RigidbodyType2D.Dynamic;
 		rb2D.sharedMaterial = null;
 		rb2D.simulated = true;
 		rb2D.useFullKinematicContacts = true;
