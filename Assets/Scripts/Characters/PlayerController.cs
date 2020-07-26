@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Race{
-    Slime,
-    Human,
-    Elf,
-    Orc
-}
-
 [RequireComponent(typeof(MoveToInput))]
 public class PlayerController : UnitController
 {

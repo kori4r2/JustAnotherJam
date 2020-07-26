@@ -31,7 +31,6 @@ public class AttackTrigger : MonoBehaviour
         attacking = true;
         sr.enabled = true;
         this.unit = unit;
-        UpdateRotation(unit.Direction);
         targetsHit.Clear();
     }
 
@@ -45,26 +44,6 @@ public class AttackTrigger : MonoBehaviour
         sr.enabled = false;
         this.unit = null;
         targetsHit.Clear();
-    }
-
-    private void UpdateRotation(Vector2 direction){
-        if(direction == Vector2.down){
-            transform.rotation = Quaternion.identity;
-        }else if(direction == Vector2.up){
-            transform.rotation = Quaternion.AngleAxis(180f, Vector3.back);
-        }else if(direction == Vector2.right){
-            transform.rotation = Quaternion.AngleAxis(-90f, Vector3.back);
-        }else if(direction == Vector2.left){
-            transform.rotation = Quaternion.AngleAxis(90f, Vector3.back);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(attacking){
-            UpdateRotation(unit.Direction);
-        }
     }
 
     void OntriggerEnter2D(Collider2D other){

@@ -9,14 +9,6 @@ using UnityEditor;
 
 public class RaceSelector : MonoBehaviour
 {
-    public enum Race
-    {
-        Slime = 0,
-        Human = 1,
-        Elf = 2,
-        Orc = 3
-    }
-
     [System.Serializable]
     public class PartsReferences
     {
@@ -88,9 +80,9 @@ public class RaceSelector : MonoBehaviour
 
     void Start()
     {
-        SetArms(CurrentArms);
-        SetBody(CurrentBody);
-        SetLegs(CurrentLegs);
+        // SetArms(CurrentArms);
+        // SetBody(CurrentBody);
+        // SetLegs(CurrentLegs);
     }
 
     public void SetArms(Race race)

@@ -30,6 +30,7 @@ public class Movable : MonoBehaviour {
 		}
 	}
 	public Vector2 Direction{ get; private set; } = Vector2.down;
+	public Vector2 CurrentSpeed { get => rigid2D?.velocity ?? Vector2.zero; }
 	private Rigidbody2D rigid2D;
 	private Animator anim;
 
