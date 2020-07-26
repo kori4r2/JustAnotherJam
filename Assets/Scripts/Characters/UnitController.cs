@@ -57,10 +57,10 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     public virtual void Equip(Arms newArms){
         arms = newArms;
         raceSelector?.SetArms(arms.RacialTrait);
-        if(atkTrigger){
+        if(atkTrigger != null){
             Destroy(atkTrigger.gameObject);
-            atkTrigger = arms.AddTrigger(transform);
         }
+        atkTrigger = arms.AddTrigger(transform);
     }
 
     public virtual void Equip(Shoes newShoes){
