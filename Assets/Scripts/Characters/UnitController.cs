@@ -52,10 +52,8 @@ public abstract class UnitController : MonoBehaviour, IDamageable
 
     protected virtual void EquipArmor(Armor newArmor){
         armor = newArmor;
-        AttackSpeed = armor.AttackSpeedModifier;
-        raceSelector?.SetBody(armor.RacialTrait, AttackSpeed);
+        raceSelector?.SetBody(armor.RacialTrait);
         Damage = Mathf.FloorToInt(baseDamage * newArmor.DamageModifier);
-        Speed = Mathf.FloorToInt(baseSpeed * newArmor.SpeedModifier);
         float hpPercentage = CurHP / (1.0f * MaxHP);
         MaxHP = Mathf.FloorToInt(baseHP * newArmor.HealthModifier);
         CurHP = Mathf.Max(Mathf.FloorToInt(hpPercentage * MaxHP), 1);
@@ -72,13 +70,16 @@ public abstract class UnitController : MonoBehaviour, IDamageable
 
     protected virtual void EquipShoes(Shoes newShoes){
         shoes = newShoes;
-        raceSelector?.SetLegs(shoes.RacialTrait);
+        AttackSpeed = shoes.AttackSpeedModifier;
+        raceSelector?.SetLegs(shoes.RacialTrait, AttackSpeed);
+        Speed = Mathf.FloorToInt(baseSpeed * shoes.SpeedModifier);
+
     }
 
-    public virtual void TakeDamage(UnitController attacker){
+    public virtual void TakeDamage(UnitController attacker, float multiplier = 1f){
         if(!invulnerable){
             // Debug.Log(attacker.name + " damaged " + name);
-            CurHP -= attacker.Damage;
+            CurHP -= Mathf.FloorToInt(attacker.Damage * multiplier);
             if(CurHP <= 0){
                 Die();
             }else{

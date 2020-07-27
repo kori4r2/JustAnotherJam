@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d756d5a47081847858e52a237c7fbc, type: 3}
   m_Name: Jelly
   m_EditorClassIdentifier: 
+  racialTrait: 0
   damageModifier: 1
   healthModifier: 3
   speedModifier: 0.5
-  racialTrait: 0
+  attackSpeedModifier: 1.25

@@ -15,5 +15,5 @@ MonoBehaviour:
   racialTrait: 2
   damageModifier: 1
   healthModifier: 0.5
-  speedModifier: 2.5
+  speedModifier: 1.5
   attackSpeedModifier: 2

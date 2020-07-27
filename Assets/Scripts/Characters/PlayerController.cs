@@ -8,6 +8,7 @@ public class PlayerController : UnitController
 {
     public static PlayerController Instance { get; private set; } = null;
 
+    public ParticleSystem hitParticles;
     public Race CurRace { get; private set; } = Race.Slime;
     private Dictionary<Race, int> racialScores;
     [SerializeField] private Navigator navigator = null;
@@ -86,12 +87,11 @@ public class PlayerController : UnitController
     public void ForceDie(){
         invulnerable = true;
         timer = float.MaxValue;
-        Destroy(raceSelector.gameObject);
+        CanMove = false;
+        raceSelector.SetAnimationDie();
         if(atkTrigger){
             Destroy(atkTrigger.gameObject);
         }
-        raceSelector = null;
-        Debug.Log("IsDead");
         StartCoroutine(DelayStartGame());
     }
 
@@ -134,5 +134,13 @@ public class PlayerController : UnitController
         CurHP = Mathf.Max(Mathf.FloorToInt(hpPercentage * MaxHP), 1);
 
         CallUpdateHealth();
+    }
+
+    public override void TakeDamage(UnitController attacker, float multiplier = 1f){
+        if(!invulnerable)
+        {
+            hitParticles.Play();
+        }
+        base.TakeDamage(attacker,multiplier);
     }
 }

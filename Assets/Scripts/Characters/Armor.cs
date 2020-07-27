@@ -10,8 +10,4 @@ public class Armor : Equipment
     public float DamageModifier { get => damageModifier; }
     [SerializeField, Range(0, 5f)] private float healthModifier = 1f;
     public float HealthModifier { get => healthModifier; }
-    [SerializeField, Range(0, 5f)] private float speedModifier = 1f;
-    public float SpeedModifier { get => speedModifier; }
-    [SerializeField, Range(0, 5f)] private float attackSpeedModifier = 1f;
-    public float AttackSpeedModifier { get => attackSpeedModifier; }
 }
