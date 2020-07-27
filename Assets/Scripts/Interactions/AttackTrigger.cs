@@ -10,7 +10,7 @@ public class AttackTrigger : MonoBehaviour
     private List<Collider2D> colliders = new List<Collider2D>();
     private UnitController unit = null;
     private bool attacking = false;
-    private List<IDamageable> targetsHit = new List<IDamageable>();
+    private List<IDamageable> targets = new List<IDamageable>();
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,46 +20,59 @@ public class AttackTrigger : MonoBehaviour
         }
         colliders.AddRange(GetComponents<Collider2D>());
         colliders.Remove(GetComponent<CompositeCollider2D>());
-        SetColliderState(false);
+        SetColliderState(true);
         attacking = false;
     }
 
     public void SetColliderState(bool state){
         foreach(Collider2D col in colliders){
+            col.isTrigger = true;
             col.enabled = state;
         }
     }
 
-    public void PrepareAttack(UnitController unit){
+    public void PrepareAttack(UnitController thisUnit){
         attacking = true;
         if(sr != null){
             sr.enabled = true;
         }
-        this.unit = unit;
-        targetsHit.Clear();
+        unit = thisUnit;
         UpdateRotation(unit.Direction);
     }
 
     public void Attack(){
-        SetColliderState(true);
+        if(unit != null && attacking){
+            foreach(IDamageable target in targets){
+                if(target != null){
+                    target.TakeDamage(unit);
+                }
+            }
+            unit = null;
+        }
     }
 
     public void EndAttack(){
         attacking = false;
-        SetColliderState(false);
         if(sr != null){
             sr.enabled = false;
         }
         this.unit = null;
-        targetsHit.Clear();
     }
 
-    void OnTriggerStay2D(Collider2D other){
+    void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag != unit.gameObject.tag){
             IDamageable target = other.GetComponent<IDamageable>();
-            if(target != null && !targetsHit.Contains(target)){
-                targetsHit.Add(target);
-                target.TakeDamage(unit);
+            if(target != null && !targets.Contains(target)){
+                targets.Add(target);
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other){
+        if(other.gameObject.tag != unit.gameObject.tag){
+            IDamageable target = other.GetComponent<IDamageable>();
+            if(target != null && !targets.Contains(target)){
+                targets.Remove(target);
             }
         }
     }
