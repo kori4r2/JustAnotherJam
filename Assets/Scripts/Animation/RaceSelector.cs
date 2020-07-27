@@ -39,7 +39,7 @@ public class RaceSelector : MonoBehaviour
     public Race CurrentBody 
     {
         get {return (Race) currentBody;}
-        set { SetBody(value, currentAtkSpeed); }
+        set { SetBody(value); }
     }
 
     public Race CurrentArms 
@@ -51,7 +51,7 @@ public class RaceSelector : MonoBehaviour
     public Race CurrentLegs 
     {
         get {return (Race) currentLegs;}
-        set { SetLegs(value); }
+        set { SetLegs(value,currentAtkSpeed); }
     }
 
     public Race CurrentHead
@@ -102,7 +102,7 @@ public class RaceSelector : MonoBehaviour
 
     public void SetArms(Race race)
     {
-        if(race == CurrentArms) return;
+        // if(race == CurrentArms) return;
 
         GameObject previousWeapon = partsReferences[currentArms].weapon;
 
@@ -118,9 +118,9 @@ public class RaceSelector : MonoBehaviour
         UpdateHead();
     }
 
-    public void SetBody(Race race, float attackSpeed)
+    public void SetBody(Race race)
     {
-        if(race == CurrentBody) return;
+        // if(race == CurrentBody) return;
 
         GameObject previousArmor = partsReferences[currentBody].armor;
 
@@ -131,15 +131,14 @@ public class RaceSelector : MonoBehaviour
         if(currentArmor) currentArmor.SetActive(true);
 
         animator.SetInteger("BodySelect", currentBody);
-        animator.SetFloat("AttackSpeed", attackSpeed);
         
         CallUpdateCenter();
         UpdateHead();
     }
 
-    public void SetLegs(Race race)
+    public void SetLegs(Race race, float attackSpeed)
     {
-        if(race == CurrentLegs) return;
+        // if(race == CurrentLegs) return;
 
         GameObject previousBoots = partsReferences[currentLegs].boots;
 
@@ -150,6 +149,8 @@ public class RaceSelector : MonoBehaviour
         if(currentBoots) currentBoots.SetActive(true);
 
         animator.SetInteger("LegSelect", currentLegs);
+        currentAtkSpeed = attackSpeed;
+        animator.SetFloat("AttackSpeed", attackSpeed);
         
         CallUpdateCenter();
         UpdateHead();
@@ -165,14 +166,38 @@ public class RaceSelector : MonoBehaviour
         animator.SetFloat("Speed", speed);
     }
 
+    bool dead = false;
+
     public void SetAnimationDie()
     {
-        animator.SetTrigger("Death");
+        if(!dead)
+        {
+            dead = true;
+            foreach (var item in partsReferences)
+            {
+                if(item.boots)
+                    item.boots.SetActive(false);
+                if(item.armor)
+                    item.armor.SetActive(false);
+                if(item.weapon)
+                    item.weapon.SetActive(false);
+                if(item.bodyPart)
+                    item.bodyPart.SetActive(false);
+            }   
+            animator.SetTrigger("Dead");
+        }
     }
 
     public void SetAnimationReapear()
     {
-        animator.SetTrigger("Reapear");
+        if(dead)
+        {
+            dead = false;
+            animator.SetTrigger("Reapear");
+            SetArms(CurrentArms);
+            SetBody(CurrentBody);
+            SetLegs(CurrentLegs,currentAtkSpeed);
+        }
     }
     
     public void CallExecuteAttack()
@@ -267,8 +292,8 @@ public class RaceSelector : MonoBehaviour
         RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
 
         rc.SetArms(Race.Human);
-        rc.SetBody(Race.Human, 1.0f);
-        rc.SetLegs(Race.Human);
+        rc.SetBody(Race.Human);
+        rc.SetLegs(Race.Human,1.0f);
     }
 
     [MenuItem("Debug/Setup Elf")]
@@ -277,8 +302,8 @@ public class RaceSelector : MonoBehaviour
         RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
 
         rc.SetArms(Race.Elf);
-        rc.SetBody(Race.Elf, 1.0f);
-        rc.SetLegs(Race.Elf);
+        rc.SetBody(Race.Elf);
+        rc.SetLegs(Race.Elf,1.0f);
     }
 
     [MenuItem("Debug/Setup Orc")]
@@ -287,8 +312,8 @@ public class RaceSelector : MonoBehaviour
         RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
 
         rc.SetArms(Race.Orc);
-        rc.SetBody(Race.Orc, 1.0f);
-        rc.SetLegs(Race.Orc);
+        rc.SetBody(Race.Orc);
+        rc.SetLegs(Race.Orc,1.0f);
     }
 
     [MenuItem("Debug/Tell me why")]
@@ -305,8 +330,16 @@ public class RaceSelector : MonoBehaviour
         RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
 
         rc.SetArms(Race.Slime);
-        rc.SetBody(Race.Slime, 1.0f);
-        rc.SetLegs(Race.Slime);
+        rc.SetBody(Race.Slime);
+        rc.SetLegs(Race.Slime,1.0f);
+    }
+
+    [MenuItem("Debug/Kill")]
+    public static void Kill()
+    {
+        RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
+
+        rc.SetAnimationDie();
     }
 
     #endif

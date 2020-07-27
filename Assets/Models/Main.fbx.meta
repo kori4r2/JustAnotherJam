@@ -198,10 +198,10 @@ ModelImporter:
     4300026: ElfEar
     7400000: Armature|ArmatureAction
     7400002: Armature|ArmatureAction.001
-    7400004: Armature|AttackElf
-    7400006: Armature|AttackHuman
-    7400008: Armature|AttackOrc
-    7400010: Armature|AttackSlime
+    7400004: Armature|AttackElf (Event)
+    7400006: Armature|AttackHuman (Event)
+    7400008: Armature|AttackOrc (Event)
+    7400010: Armature|AttackSlime (Event)
     7400012: Armature|Death
     7400014: Armature|IdleElf
     7400016: Armature|IdleHuman
@@ -213,6 +213,10 @@ ModelImporter:
     7400028: Armature|WalkOrc
     7400030: Armature|WalkSlime
     7400032: Armature|Revive
+    7400034: 'Armature|AttackElf '
+    7400036: Armature|AttackHuman
+    7400038: Armature|AttackOrc
+    7400040: Armature|AttackSlime
     9500000: //RootNode
     13700000: ArmorElf
     13700002: ArmorHuman
@@ -310,7 +314,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|AttackElf
+      name: Armature|AttackElf (Event)
       takeName: Armature|AttackElf
       firstFrame: 0
       lastFrame: 44
@@ -354,7 +358,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|AttackHuman
+      name: Armature|AttackHuman (Event)
       takeName: Armature|AttackHuman
       firstFrame: 0
       lastFrame: 44
@@ -398,7 +402,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|AttackOrc
+      name: Armature|AttackOrc (Event)
       takeName: Armature|AttackOrc
       firstFrame: 0
       lastFrame: 44
@@ -442,7 +446,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|AttackSlime
+      name: Armature|AttackSlime (Event)
       takeName: Armature|AttackSlime
       firstFrame: 0
       lastFrame: 44
@@ -770,6 +774,118 @@ ModelImporter:
       takeName: Armature|Death
       firstFrame: 20
       lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: 'Armature|AttackElf '
+      takeName: Armature|AttackElf
+      firstFrame: 0
+      lastFrame: 44
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|AttackHuman
+      takeName: Armature|AttackHuman
+      firstFrame: 0
+      lastFrame: 44
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|AttackOrc
+      takeName: Armature|AttackOrc
+      firstFrame: 0
+      lastFrame: 44
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|AttackSlime
+      takeName: Armature|AttackSlime
+      firstFrame: 0
+      lastFrame: 44
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

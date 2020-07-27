@@ -6,10 +6,12 @@ using UnityEngine;
 public class EnemyController : UnitController
 {
 	public Enemy so;
+	public ParticleSystem hitParticles;
 	[SerializeField] private bool killable = true;
 	public bool Killable { get => killable; }
 	[SerializeField, Range(0, 5f)] private float aimingTime = 2f;
 	[SerializeField, Range(0, 5f)] private float attackCooldown = 3f;
+	[SerializeField, Range(0, 5f)] private float attackRandomizer = 1f;
 	private bool aiming = false;
 	private bool chillin = false;
 	private float atkTimer = 0;
@@ -57,9 +59,13 @@ public class EnemyController : UnitController
 		alignToPlayer.idealRange = newArms.IdealRange;
 	}
 
-	public override void TakeDamage(UnitController attacker){
+	public override void TakeDamage(UnitController attacker, float multiplier = 1f){
 		if(killable){
-			base.TakeDamage(attacker);
+			if(!invulnerable)
+			{
+				hitParticles.Play();
+			}
+			base.TakeDamage(attacker, multiplier);
 		}
 	}
 
@@ -71,7 +77,7 @@ public class EnemyController : UnitController
 	void OnCollisionEnter2D(Collision2D collision){
 		if(collision.gameObject.tag == "Player"){
 			PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-			player.TakeDamage(this);
+			player.TakeDamage(this,0.25f);
 		}
 	}
 
@@ -92,7 +98,7 @@ public class EnemyController : UnitController
 				}else if(!aiming && !chillin){
 					chillin = true;
 					movable.NextPosition = moveToPosition;
-					atkTimer = attackCooldown;
+					atkTimer = attackCooldown + Random.Range(-0.5f,0.5f) * attackRandomizer;
 				}else if(!aiming && chillin){
 					chillin = false;
 					aiming = true;
