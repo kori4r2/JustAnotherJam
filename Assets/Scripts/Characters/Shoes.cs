@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="NewShoes", menuName ="Shoes")]
-public class Shoes : ScriptableObject
+public class Shoes : Equipment
 {
-    [SerializeField] private Race racialTrait = Race.Slime;
-    public Race RacialTrait { get => racialTrait; }
+    public override TypeEquip Type { get => TypeEquip.Shoes; }
 }

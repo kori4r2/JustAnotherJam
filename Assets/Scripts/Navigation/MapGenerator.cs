@@ -16,6 +16,16 @@ public class MapGenerator : MonoBehaviour
             objects.Add(DoorPosition.West, null);
         }
 
+        public bool AddObject(RoomObject newObject){
+            foreach(DoorPosition key in objects.Keys){
+                if(objects[key] == null){
+                    objects[key] = newObject;
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void Spawn(GameObject prefab, Navigator navigator){
             if(!spawned){
                 SO.Spawn(prefab, GetWorldPos(), navigator, objects[DoorPosition.North], objects[DoorPosition.South], objects[DoorPosition.East], objects[DoorPosition.West]);
@@ -39,14 +49,17 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private List<GameObject> roomPrefabs = new List<GameObject>();
     [SerializeField] private Door door = null;
     [SerializeField] private List<Enemy> enemies = new List<Enemy>();
-    [SerializeField] private RoomObject slimeItem = null;
-    [SerializeField] private RoomObject humanItem = null;
-    [SerializeField] private RoomObject elfItem = null;
-    [SerializeField] private RoomObject orcItem = null;
+    [SerializeField] private RoomObject potionItem = null;
+    private int pendingPotions = 0;
+    [SerializeField] private List<RoomObject> possibleItems  = new List<RoomObject>();
+    private List<RoomObject> items = new List<RoomObject>();
+    private int pendingItems = 0;
     // Start is called before the first frame update
     void Start()
     {
         navigator.Restart();
+        items.Clear();
+        items.AddRange(possibleItems);
         GenerateMap();
     }
 
@@ -120,6 +133,15 @@ public class MapGenerator : MonoBehaviour
             directionHistory.Add(Vector2.down);
 
             while(curID < nRooms){
+                // A cada 3 salas coloca uma poção
+                if(curID % 2 == 0){
+                    pendingPotions++;
+                }
+                // A cada 4 salas coloca um item
+                if(curID % 3 == 0){
+                    pendingItems++;
+                }
+
                 // Cria a sala em questão
                 map.Add(curPos, new RoomInfo());
                 map[curPos].SO.ID = curID;
@@ -139,11 +161,32 @@ public class MapGenerator : MonoBehaviour
                     for(int i = 0; i < 3; i++){
                         Enemy newEnemy = Instantiate(enemies[Random.Range(0, enemies.Count)]);
                         if(newEnemy != null){
-                            newEnemy.spawnPosition = new Vector3(-5 + (i * 5), 0, 0);
+                            if(Mathf.Abs(curDirection.x) > Mathf.Abs(curDirection.y)){
+                                newEnemy.spawnPosition = new Vector3(0, -5 + (i * 5), 0);
+                            }else{
+                                newEnemy.spawnPosition = new Vector3(-5 + (i * 5), 0, 0);
+                            }
                             map[curPos].SO.enemies.Add(newEnemy);
                         }
                     }
-                    // TO DO calcula a chance e coloca um item em um dos espaços vazios
+
+                    if(pendingPotions > 0){
+                        if(map[curPos].AddObject(Instantiate(potionItem))){
+                            pendingPotions--;
+                        }
+                    }
+                    if(pendingItems > 0){
+                        if(items.Count <= 0){
+                            items.AddRange(possibleItems);
+                        }
+                        // Sorteia um item
+                        int index = Random.Range(0, items.Count);
+                        if(map[curPos].AddObject(Instantiate(items[index]))){
+                            // Remove da lista para evitar items duplicados
+                            items.RemoveAt(index);
+                            pendingItems--;
+                        }
+                    }
 
                     // Seleciona a posição da saída na sala atual
                     Vector2 nextDir = NextDirection(curDirection, curPos, map);

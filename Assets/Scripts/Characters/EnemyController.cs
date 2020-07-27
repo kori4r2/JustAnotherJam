@@ -52,8 +52,8 @@ public class EnemyController : UnitController
 		CanMove = true;
 	}
 
-	public override void Equip(Arms newArms){
-		base.Equip(newArms);
+	protected override void EquipWeapon(Arms newArms){
+		base.EquipWeapon(newArms);
 		alignToPlayer.idealRange = newArms.IdealRange;
 	}
 

@@ -14,8 +14,10 @@ public class AttackTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if(sr == null)sr = GetComponent<SpriteRenderer>();
-        sr.enabled = false;
+        if(sr == null) sr = GetComponent<SpriteRenderer>();
+        if(sr != null){
+            sr.enabled = false;
+        }
         colliders.AddRange(GetComponents<Collider2D>());
         colliders.Remove(GetComponent<CompositeCollider2D>());
         SetColliderState(false);
@@ -30,7 +32,9 @@ public class AttackTrigger : MonoBehaviour
 
     public void PrepareAttack(UnitController unit){
         attacking = true;
-        sr.enabled = true;
+        if(sr != null){
+            sr.enabled = true;
+        }
         this.unit = unit;
         targetsHit.Clear();
         UpdateRotation(unit.Direction);
@@ -43,7 +47,9 @@ public class AttackTrigger : MonoBehaviour
     public void EndAttack(){
         attacking = false;
         SetColliderState(false);
-        sr.enabled = false;
+        if(sr != null){
+            sr.enabled = false;
+        }
         this.unit = null;
         targetsHit.Clear();
     }

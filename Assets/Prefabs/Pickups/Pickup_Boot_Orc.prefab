@@ -67,21 +67,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8140173012636767926, guid: c95679025b93b2545821d2e58d33891b,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300004, guid: 44b82f78850d9044b949730093ca1c05, type: 3}
-    - target: {fileID: 4092730957242466568, guid: c95679025b93b2545821d2e58d33891b,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 74447d0b17bcacf448762442b081054e, type: 2}
     - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
         type: 3}
       propertyPath: shoesEquip
       value: 
       objectReference: {fileID: 11400000, guid: a5e8dd875ca15ed40b0a1f480d4aa64a,
         type: 2}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: equipment
+      value: 
+      objectReference: {fileID: 11400000, guid: a5e8dd875ca15ed40b0a1f480d4aa64a,
+        type: 2}
+    - target: {fileID: 4092730957242466568, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 74447d0b17bcacf448762442b081054e, type: 2}
+    - target: {fileID: 8140173012636767926, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300004, guid: 44b82f78850d9044b949730093ca1c05, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c95679025b93b2545821d2e58d33891b, type: 3}

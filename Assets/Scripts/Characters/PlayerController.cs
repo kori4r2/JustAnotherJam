@@ -43,38 +43,61 @@ public class PlayerController : UnitController
         }
     }
 
-    public override void Equip(Armor newArmor){
+    public void Equip(Equipment equipment){
+        if(equipment == null) return;
+
+        switch(equipment.Type){
+            case TypeEquip.Armor:
+                Armor newArmor = equipment as Armor;
+                EquipArmor(newArmor);
+                break;
+            case TypeEquip.Arms:
+                Arms newArms = equipment as Arms;
+                EquipWeapon(newArms);
+                break;
+            case TypeEquip.Shoes:
+                Shoes newShoes = equipment as Shoes;
+                EquipShoes(newShoes);
+                break;
+        }
+    }
+
+    protected override void EquipArmor(Armor newArmor){
         racialScores[armor.RacialTrait]--;
-        base.Equip(newArmor);
+        base.EquipArmor(newArmor);
         racialScores[armor.RacialTrait]++;
         UpdateRace();
     }
 
-    public override void Equip(Arms newArms){
+    protected override void EquipWeapon(Arms newArms){
         racialScores[arms.RacialTrait]--;
-        base.Equip(newArms);
+        base.EquipWeapon(newArms);
         racialScores[arms.RacialTrait]++;
         UpdateRace();
     }
 
-    public override void Equip(Shoes newShoes){
+    protected override void EquipShoes(Shoes newShoes){
         racialScores[shoes.RacialTrait]--;
-        base.Equip(newShoes);
+        base.EquipShoes(newShoes);
         racialScores[shoes.RacialTrait]++;
         UpdateRace();
     }
 
+    public void ForceDie(){
+        invulnerable = true;
+        timer = float.MaxValue;
+        Destroy(raceSelector.gameObject);
+        if(atkTrigger){
+            Destroy(atkTrigger.gameObject);
+        }
+        raceSelector = null;
+        Debug.Log("IsDead");
+        StartCoroutine(DelayStartGame());
+    }
+
     protected override void Die(){
         if(!invulnerable){
-            invulnerable = true;
-            timer = float.MaxValue;
-            Destroy(raceSelector.gameObject);
-            if(atkTrigger){
-                Destroy(atkTrigger.gameObject);
-            }
-            raceSelector = null;
-            Debug.Log("IsDead");
-            StartCoroutine(DelayStartGame());
+            ForceDie();
         }
     }
 

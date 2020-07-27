@@ -39,7 +39,7 @@ public class RaceSelector : MonoBehaviour
     public Race CurrentBody 
     {
         get {return (Race) currentBody;}
-        set { SetBody(value); }
+        set { SetBody(value, currentAtkSpeed); }
     }
 
     public Race CurrentArms 
@@ -67,6 +67,7 @@ public class RaceSelector : MonoBehaviour
     private int currentLegs = 0;
     private int currentBody = 0;
     private int currentArms = 0;
+    private float currentAtkSpeed = 1f;
 
     private float defaultPositionY;
     private float defaultBonePositionY;
@@ -117,7 +118,7 @@ public class RaceSelector : MonoBehaviour
         UpdateHead();
     }
 
-    public void SetBody(Race race)
+    public void SetBody(Race race, float attackSpeed)
     {
         if(race == CurrentBody) return;
 
@@ -130,6 +131,7 @@ public class RaceSelector : MonoBehaviour
         if(currentArmor) currentArmor.SetActive(true);
 
         animator.SetInteger("BodySelect", currentBody);
+        animator.SetFloat("AttackSpeed", attackSpeed);
         
         CallUpdateCenter();
         UpdateHead();
@@ -265,7 +267,7 @@ public class RaceSelector : MonoBehaviour
         RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
 
         rc.SetArms(Race.Human);
-        rc.SetBody(Race.Human);
+        rc.SetBody(Race.Human, 1.0f);
         rc.SetLegs(Race.Human);
     }
 
@@ -275,7 +277,7 @@ public class RaceSelector : MonoBehaviour
         RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
 
         rc.SetArms(Race.Elf);
-        rc.SetBody(Race.Elf);
+        rc.SetBody(Race.Elf, 1.0f);
         rc.SetLegs(Race.Elf);
     }
 
@@ -285,7 +287,7 @@ public class RaceSelector : MonoBehaviour
         RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
 
         rc.SetArms(Race.Orc);
-        rc.SetBody(Race.Orc);
+        rc.SetBody(Race.Orc, 1.0f);
         rc.SetLegs(Race.Orc);
     }
 
@@ -303,7 +305,7 @@ public class RaceSelector : MonoBehaviour
         RaceSelector rc = GameObject.FindObjectOfType<RaceSelector>();
 
         rc.SetArms(Race.Slime);
-        rc.SetBody(Race.Slime);
+        rc.SetBody(Race.Slime, 1.0f);
         rc.SetLegs(Race.Slime);
     }
 

@@ -814,7 +814,7 @@ MonoBehaviour:
   player: {fileID: 1961832361}
   firstRoom: {fileID: 8432449408825392457, guid: 09885765376d76448aecc47a5c2e9fb3,
     type: 3}
-  lastRoom: {fileID: 8432449408825392457, guid: 09885765376d76448aecc47a5c2e9fb3,
+  lastRoom: {fileID: 8432449408825392457, guid: ad6d7840e66a53b48ab9570ff5c0b84c,
     type: 3}
   roomPrefabs:
   - {fileID: 8432449408825392457, guid: 09885765376d76448aecc47a5c2e9fb3, type: 3}
@@ -823,10 +823,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9fa0bda3dfb014444a059f5041b4984e, type: 2}
   - {fileID: 11400000, guid: a7d3c495300ea3b4bab2d6c98f7b16e8, type: 2}
   - {fileID: 11400000, guid: a7d3c495300ea3b4bab2d6c98f7b16e8, type: 2}
-  slimeItem: {fileID: 0}
-  humanItem: {fileID: 0}
-  elfItem: {fileID: 0}
-  orcItem: {fileID: 0}
+  potionItem: {fileID: 11400000, guid: 069cc8e48dfee83419253341f49053ee, type: 2}
+  possibleItems:
+  - {fileID: 11400000, guid: 6cff65ee254f8e84c904254888ffc079, type: 2}
+  - {fileID: 11400000, guid: f31ae8a84824a734db41977368375110, type: 2}
+  - {fileID: 11400000, guid: 5d3b7b20d82fde54fa61f721f4498ed6, type: 2}
+  - {fileID: 11400000, guid: 5c56f5362275d7348867e189845e57be, type: 2}
+  - {fileID: 11400000, guid: 6bd1e2e369a8de24380b5814f092fd19, type: 2}
+  - {fileID: 11400000, guid: 986939374d15fd44dab00e489470185f, type: 2}
+  - {fileID: 11400000, guid: 017cef4093c8a1c45a9983832a2d4f73, type: 2}
+  - {fileID: 11400000, guid: 83973890d50ef4d40b1e4fe97aaa1967, type: 2}
+  - {fileID: 11400000, guid: 91b0811d89e218140aca3e4a579cc73e, type: 2}
 --- !u!4 &1308342682
 Transform:
   m_ObjectHideFlags: 0
@@ -1131,6 +1138,7 @@ MonoBehaviour:
   armor: {fileID: 11400000, guid: e307c003a524e3049a9b5f18f3c11783, type: 2}
   arms: {fileID: 11400000, guid: 386c3167ba023c14fa508ed4770dd19e, type: 2}
   shoes: {fileID: 11400000, guid: 3d52c68113401c440af71f003404fc09, type: 2}
+  invulnerable: 0
   navigator: {fileID: 11400000, guid: dc98c2c3146e49940805c28c4e6f728c, type: 2}
 --- !u!114 &1961832362
 MonoBehaviour:

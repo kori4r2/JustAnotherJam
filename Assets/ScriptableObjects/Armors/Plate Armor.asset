@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d756d5a47081847858e52a237c7fbc, type: 3}
   m_Name: Plate Armor
   m_EditorClassIdentifier: 
+  racialTrait: 3
   damageModifier: 2
   healthModifier: 2
   speedModifier: 0.5
-  racialTrait: 3
+  attackSpeedModifier: 0.75

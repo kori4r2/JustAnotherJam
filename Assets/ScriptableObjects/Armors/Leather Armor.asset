@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d756d5a47081847858e52a237c7fbc, type: 3}
   m_Name: Leather Armor
   m_EditorClassIdentifier: 
+  racialTrait: 2
   damageModifier: 1
   healthModifier: 0.5
-  speedModifier: 3
-  racialTrait: 2
+  speedModifier: 2.5
+  attackSpeedModifier: 2

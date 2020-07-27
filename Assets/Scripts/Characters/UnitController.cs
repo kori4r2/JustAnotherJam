@@ -16,7 +16,7 @@ public abstract class UnitController : MonoBehaviour, IDamageable
 {
     protected const int baseDamage = 50;
     protected const int baseHP = 100;
-    protected const int baseSpeed = 10;
+    protected const int baseSpeed = 8;
 
     public int MaxHP { get; protected set; } = baseHP;
     public int CurHP { get; protected set; } = baseHP;
@@ -29,6 +29,7 @@ public abstract class UnitController : MonoBehaviour, IDamageable
             movable.moveSpeed = speed;
         }
     }
+    public float AttackSpeed { get; protected set; } = 1.0f;
 
     protected Collider2D col;
     protected Movable movable;
@@ -42,16 +43,17 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     [SerializeField] protected Shoes shoes;
     protected AttackTrigger atkTrigger = null;
     protected float timer = 0f;
-    protected bool invulnerable = false;
+    public bool invulnerable = false;
     private bool attacking = false;
 
     public delegate void HealthCallback(float percentHealth);
 
     public HealthCallback OnHealthChange = null;
 
-    public virtual void Equip(Armor newArmor){
+    protected virtual void EquipArmor(Armor newArmor){
         armor = newArmor;
-        raceSelector?.SetBody(armor.RacialTrait);
+        AttackSpeed = armor.AttackSpeedModifier;
+        raceSelector?.SetBody(armor.RacialTrait, AttackSpeed);
         Damage = Mathf.FloorToInt(baseDamage * newArmor.DamageModifier);
         Speed = Mathf.FloorToInt(baseSpeed * newArmor.SpeedModifier);
         float hpPercentage = CurHP / (1.0f * MaxHP);
@@ -59,7 +61,7 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         CurHP = Mathf.Max(Mathf.FloorToInt(hpPercentage * MaxHP), 1);
     }
 
-    public virtual void Equip(Arms newArms){
+    protected virtual void EquipWeapon(Arms newArms){
         arms = newArms;
         raceSelector?.SetArms(arms.RacialTrait);
         if(atkTrigger != null){
@@ -68,7 +70,7 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         atkTrigger = arms.AddTrigger(transform);
     }
 
-    public virtual void Equip(Shoes newShoes){
+    protected virtual void EquipShoes(Shoes newShoes){
         shoes = newShoes;
         raceSelector?.SetLegs(shoes.RacialTrait);
     }
@@ -124,6 +126,7 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         col = GetComponent<Collider2D>();
         movable = GetComponent<Movable>();
         anim = GetComponent<Animator>();
+        timer = 0f;
     }
 
     private void UpdateRotation(Vector2 direction){
@@ -153,9 +156,9 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     }
 
     void Start(){
-        Equip(armor);
-        Equip(arms);
-        Equip(shoes);
+        EquipArmor(armor);
+        EquipWeapon(arms);
+        EquipShoes(shoes);
         if(raceSelector){
             raceSelector.onExecuteAttack.AddListener(Attack);
             raceSelector.onFinishedAttack.AddListener(EndAttack);

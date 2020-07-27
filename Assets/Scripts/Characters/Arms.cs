@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="NewArms", menuName ="Arms")]
-public class Arms : ScriptableObject
+public class Arms : Equipment
 {
-    [SerializeField] private Race racialTrait = Race.Slime;
-    public Race RacialTrait { get => racialTrait; }
+    public override TypeEquip Type { get => TypeEquip.Arms; }
     [SerializeField] private GameObject damagePrefab = null;
     [SerializeField] private float idealRange = 2f;
     public float IdealRange { get => idealRange; }

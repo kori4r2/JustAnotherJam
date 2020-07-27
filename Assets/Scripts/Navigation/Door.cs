@@ -32,6 +32,7 @@ public class Door : RoomObject
 
     public override void Spawn(Transform parent, Vector3 pos, Quaternion rotation){
         base.Spawn(parent, pos, rotation);
+        isOpen = false;
         trigger = obj.GetComponent<DoorTrigger>();
         trigger.SetCallbacks(PlayerEntered, PlayerExited);
         PlayerExited?.AddListener(MoveCameraToTarget);
@@ -53,7 +54,7 @@ public class Door : RoomObject
 
     public void Open(){
         isOpen = true;
-        trigger.IsOpen = isOpen;
+        trigger.IsOpen = true;
         // Muda o sprite e o tipo de colisor do objeto correspondente
     }
 

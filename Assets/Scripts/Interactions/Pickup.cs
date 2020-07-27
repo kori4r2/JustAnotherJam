@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup : MonoBehaviour
+public class Pickup : MonoBehaviour
 {
-    [Range(0,1)]
-    [Tooltip("In percent of total health")]
-    public float cureAmount = 0.2f; 
+    [SerializeField] private Equipment equipment;
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.tag == "Player")
@@ -15,10 +14,9 @@ public class HealthPickup : MonoBehaviour
 
             if(pc != null)
             {
-                pc.CurePlayer(cureAmount);
+                pc.Equip(equipment);
+                Destroy(gameObject);
             }
         }
-
     }
-
 }

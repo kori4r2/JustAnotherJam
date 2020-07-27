@@ -67,6 +67,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: typeEquip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: armsEquip
+      value: 
+      objectReference: {fileID: 11400000, guid: 132bf2767efe69c4f89278e3ccf3adc6,
+        type: 2}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: equipment
+      value: 
+      objectReference: {fileID: 11400000, guid: 132bf2767efe69c4f89278e3ccf3adc6,
+        type: 2}
     - target: {fileID: 147368675514770285, guid: c95679025b93b2545821d2e58d33891b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -127,11 +144,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 36.098003
       objectReference: {fileID: 0}
-    - target: {fileID: 8140173012636767926, guid: c95679025b93b2545821d2e58d33891b,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300010, guid: 44b82f78850d9044b949730093ca1c05, type: 3}
     - target: {fileID: 4092730957242466568, guid: c95679025b93b2545821d2e58d33891b,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -152,16 +164,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: 313281d66d797834fadeff0395f100d5, type: 2}
-    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+    - target: {fileID: 8140173012636767926, guid: c95679025b93b2545821d2e58d33891b,
         type: 3}
-      propertyPath: typeEquip
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
-        type: 3}
-      propertyPath: armsEquip
+      propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 11400000, guid: 132bf2767efe69c4f89278e3ccf3adc6,
-        type: 2}
+      objectReference: {fileID: 4300010, guid: 44b82f78850d9044b949730093ca1c05, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c95679025b93b2545821d2e58d33891b, type: 3}

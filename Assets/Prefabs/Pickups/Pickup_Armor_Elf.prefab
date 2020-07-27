@@ -67,6 +67,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: typeEquip
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: armorEquip
+      value: 
+      objectReference: {fileID: 11400000, guid: 301496537a80d8c4288cf168a37ec7f6,
+        type: 2}
+    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+        type: 3}
+      propertyPath: equipment
+      value: 
+      objectReference: {fileID: 11400000, guid: 301496537a80d8c4288cf168a37ec7f6,
+        type: 2}
     - target: {fileID: 4341218284370784796, guid: c95679025b93b2545821d2e58d33891b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -86,11 +103,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.289
-      objectReference: {fileID: 0}
-    - target: {fileID: 147368675514810189, guid: c95679025b93b2545821d2e58d33891b,
-        type: 3}
-      propertyPath: m_Name
-      value: Shirt
       objectReference: {fileID: 0}
     - target: {fileID: 147368675514770285, guid: c95679025b93b2545821d2e58d33891b,
         type: 3}
@@ -132,26 +144,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -175.00002
       objectReference: {fileID: 0}
-    - target: {fileID: 8140173012636767926, guid: c95679025b93b2545821d2e58d33891b,
+    - target: {fileID: 147368675514810189, guid: c95679025b93b2545821d2e58d33891b,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300008, guid: 7bb8f6e7278eb2d42b2d25f86bdfc496, type: 3}
+      propertyPath: m_Name
+      value: Shirt
+      objectReference: {fileID: 0}
     - target: {fileID: 4092730957242466568, guid: c95679025b93b2545821d2e58d33891b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 313281d66d797834fadeff0395f100d5, type: 2}
-    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
+    - target: {fileID: 8140173012636767926, guid: c95679025b93b2545821d2e58d33891b,
         type: 3}
-      propertyPath: typeEquip
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720988438693884229, guid: c95679025b93b2545821d2e58d33891b,
-        type: 3}
-      propertyPath: armorEquip
+      propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 11400000, guid: 301496537a80d8c4288cf168a37ec7f6,
-        type: 2}
+      objectReference: {fileID: 4300008, guid: 7bb8f6e7278eb2d42b2d25f86bdfc496, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c95679025b93b2545821d2e58d33891b, type: 3}
