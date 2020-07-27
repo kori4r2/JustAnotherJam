@@ -20,6 +20,7 @@ public class MoveToNearbyPosition : MoveTo
 
     public override void Activate(){
         ForceStop();
+        timer = 0.5f;
         base.Activate();
     }
 

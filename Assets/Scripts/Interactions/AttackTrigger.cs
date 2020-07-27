@@ -33,6 +33,7 @@ public class AttackTrigger : MonoBehaviour
         sr.enabled = true;
         this.unit = unit;
         targetsHit.Clear();
+        UpdateRotation(unit.Direction);
     }
 
     public void Attack(){
@@ -47,13 +48,25 @@ public class AttackTrigger : MonoBehaviour
         targetsHit.Clear();
     }
 
-    void OntriggerEnter2D(Collider2D other){
+    void OnTriggerStay2D(Collider2D other){
         if(other.gameObject.tag != unit.gameObject.tag){
             IDamageable target = other.GetComponent<IDamageable>();
             if(target != null && !targetsHit.Contains(target)){
                 targetsHit.Add(target);
                 target.TakeDamage(unit);
             }
+        }
+    }
+
+    private void UpdateRotation(Vector2 direction){
+        if(direction == Vector2.down){
+            transform.rotation = Quaternion.identity;
+        }else if(direction == Vector2.up){
+            transform.rotation = Quaternion.AngleAxis(180f, Vector3.back);
+        }else if(direction == Vector2.right){
+            transform.rotation = Quaternion.AngleAxis(-90f, Vector3.back);
+        }else if(direction == Vector2.left){
+            transform.rotation = Quaternion.AngleAxis(90f, Vector3.back);
         }
     }
 }

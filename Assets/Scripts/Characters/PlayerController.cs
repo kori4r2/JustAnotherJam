@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(MoveToInput))]
 public class PlayerController : UnitController
@@ -63,6 +64,25 @@ public class PlayerController : UnitController
         UpdateRace();
     }
 
+    protected override void Die(){
+        if(!invulnerable){
+            invulnerable = true;
+            timer = float.MaxValue;
+            Destroy(raceSelector.gameObject);
+            if(atkTrigger){
+                Destroy(atkTrigger.gameObject);
+            }
+            raceSelector = null;
+            Debug.Log("IsDead");
+            StartCoroutine(DelayStartGame());
+        }
+    }
+
+    private IEnumerator DelayStartGame(){
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     private void UpdateRace(){
         foreach(Race race in racialScores.Keys){
             if(racialScores[race] >= 2){
@@ -83,11 +103,13 @@ public class PlayerController : UnitController
 
     public void CurePlayer(float percent)
     {
-        float hpPercentage = MaxHP / (1.0f * CurHP);
+        float hpPercentage = CurHP / (1.0f * MaxHP);
         hpPercentage += percent;
 
         hpPercentage = Mathf.Clamp01(hpPercentage);
 
         CurHP = Mathf.Max(Mathf.FloorToInt(hpPercentage * MaxHP), 1);
+
+        CallUpdateHealth();
     }
 }

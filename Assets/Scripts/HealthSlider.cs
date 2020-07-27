@@ -10,7 +10,7 @@ public class HealthSlider : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerController>();
+        player = PlayerController.Instance;
         if(player != null)
         {
             player.OnHealthChange += UpdateBar;

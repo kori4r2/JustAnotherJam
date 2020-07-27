@@ -8,33 +8,34 @@ public class EnemyController : UnitController
 	public Enemy so;
 	[SerializeField] private bool killable = true;
 	public bool Killable { get => killable; }
-	private float aimingTime = 2f;
-	private float attackCooldown = 3f;
+	[SerializeField, Range(0, 5f)] private float aimingTime = 2f;
+	[SerializeField, Range(0, 5f)] private float attackCooldown = 3f;
 	private bool aiming = false;
 	private bool chillin = false;
 	private float atkTimer = 0;
 	private LineUpToTarget alignToPlayer = null;
 	private MoveToNearbyPosition moveToPosition = null;
+	private Vector2 lastDirection = Vector2.down;
 
 	public override Vector2 Direction{
 		get{
-			if(PlayerController.Instance){
+			if(PlayerController.Instance && CanMove){
 				Vector3 difference = PlayerController.Instance.transform.position - transform.position;
 				if(Mathf.Abs(difference.y) > Mathf.Abs(difference.x)){
 					if(difference.y > 0){
-						return Vector2.up;
+						lastDirection = Vector2.up;
 					}else{
-						return Vector2.down;
+						lastDirection = Vector2.down;
 					}
 				}else{
 					if(difference.x > 0){
-						return Vector2.right;
+						lastDirection = Vector2.right;
 					}else{
-						return Vector2.left;
+						lastDirection = Vector2.left;
 					}
 				}
 			}
-			return Vector2.down;
+			return lastDirection;
 		}
 	}
 
@@ -68,6 +69,13 @@ public class EnemyController : UnitController
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
+		if(collision.gameObject.tag == "Player"){
+			PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+			player.TakeDamage(this);
+		}
+	}
+
+	void OnCollisionStay2D(Collision2D collision){
 		if(collision.gameObject.tag == "Player"){
 			PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 			player.TakeDamage(this);

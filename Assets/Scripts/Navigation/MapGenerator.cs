@@ -25,7 +25,7 @@ public class MapGenerator : MonoBehaviour
         }
 
         public Vector3 GetWorldPos(){
-            return new Vector3(coord.x * Room.size, coord.y * Room.size);
+            return new Vector3(coord.x * Room.size, coord.y * Room.size, 0f);
         }
     }
 
@@ -97,6 +97,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     private void GenerateMap(){
+        Debug.Log("Gerou um mapa");
         if(navigator && player){
             Dictionary<Vector2, RoomInfo> map = new Dictionary<Vector2, RoomInfo>();
             Vector2 curPos = Vector2.zero;
@@ -176,7 +177,8 @@ public class MapGenerator : MonoBehaviour
             }
 
             player.transform.position = map[Vector2.zero].GetWorldPos();
-            navigator.Camera.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, navigator.Camera.transform.position.z);
+            // player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, 10f);
+            navigator.Camera.MoveToRoom(map[Vector2.zero].SO, true);
 
             map.Clear();
             navigator.StartNavigation();

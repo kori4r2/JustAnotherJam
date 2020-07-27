@@ -53,13 +53,13 @@ public class Door : RoomObject
 
     public void Open(){
         isOpen = true;
-        trigger.isOpen = isOpen;
+        trigger.IsOpen = isOpen;
         // Muda o sprite e o tipo de colisor do objeto correspondente
     }
 
     public override void Enable(){
         base.Enable();
         // Fecha a porta sempre que entra na sala
-        trigger.isOpen = false;
+        trigger.IsOpen = false;
     }
 }

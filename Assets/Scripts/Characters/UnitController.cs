@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Events;
+using UnityEngine.Events;
 
 public enum Race{
     Slime = 0,
@@ -36,13 +36,13 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     public virtual Vector2 Direction { get => movable.Direction; }
     public bool CanMove { get => movable.CanMove; set => movable.CanMove = value; }
     [SerializeField, Range(0f, 5f)] protected float invulnerableTime = 1f;
-    [SerializeField] private RaceSelector raceSelector;
+    [SerializeField] protected RaceSelector raceSelector;
     [SerializeField] protected Armor armor;
     [SerializeField] protected Arms arms;
     [SerializeField] protected Shoes shoes;
-    private AttackTrigger atkTrigger = null;
-    private float timer = 0f;
-    private bool invulnerable = false;
+    protected AttackTrigger atkTrigger = null;
+    protected float timer = 0f;
+    protected bool invulnerable = false;
     private bool attacking = false;
 
     public delegate void HealthCallback(float percentHealth);
@@ -54,7 +54,7 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         raceSelector?.SetBody(armor.RacialTrait);
         Damage = Mathf.FloorToInt(baseDamage * newArmor.DamageModifier);
         Speed = Mathf.FloorToInt(baseSpeed * newArmor.SpeedModifier);
-        float hpPercentage = MaxHP / (1.0f * CurHP);
+        float hpPercentage = CurHP / (1.0f * MaxHP);
         MaxHP = Mathf.FloorToInt(baseHP * newArmor.HealthModifier);
         CurHP = Mathf.Max(Mathf.FloorToInt(hpPercentage * MaxHP), 1);
     }
@@ -74,12 +74,16 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     }
 
     public virtual void TakeDamage(UnitController attacker){
-        CurHP -= attacker.Damage;
-        if(CurHP <= 0){
-            Die();
-        }else{
-            timer = invulnerableTime;
-            invulnerable = true;
+        if(!invulnerable){
+            // Debug.Log(attacker.name + " damaged " + name);
+            CurHP -= attacker.Damage;
+            if(CurHP <= 0){
+                Die();
+            }else{
+                timer = invulnerableTime;
+                invulnerable = true;
+            }
+            CallUpdateHealth();
         }
     }
 
@@ -88,9 +92,11 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     }
 
     protected void StartAttack(){
-        CanMove = false;
-        atkTrigger?.PrepareAttack(this);
-        raceSelector?.StartAttackAnimation();
+        if(CanMove){
+            CanMove = false;
+            atkTrigger?.PrepareAttack(this);
+            raceSelector?.StartAttackAnimation();
+        }
     }
 
     // Função que deve ser chamada como evento de animação
@@ -121,19 +127,21 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     }
 
     private void UpdateRotation(Vector2 direction){
+        Vector3 currentAngles = raceSelector.transform.localEulerAngles;
         if(direction == Vector2.down){
-            transform.rotation = Quaternion.identity;
+            raceSelector.transform.localEulerAngles = new Vector3(currentAngles.x, 180f, currentAngles.z);
         }else if(direction == Vector2.up){
-            transform.rotation = Quaternion.AngleAxis(180f, Vector3.back);
+            raceSelector.transform.localEulerAngles = new Vector3(currentAngles.x, 0f, currentAngles.z);
         }else if(direction == Vector2.right){
-            transform.rotation = Quaternion.AngleAxis(-90f, Vector3.back);
+            raceSelector.transform.localEulerAngles = new Vector3(currentAngles.x, 90f, currentAngles.z);
         }else if(direction == Vector2.left){
-            transform.rotation = Quaternion.AngleAxis(90f, Vector3.back);
+            raceSelector.transform.localEulerAngles = new Vector3(currentAngles.x, -90f, currentAngles.z);
         }
     }
 
     public void Update(){
-        UpdateRotation(Direction);
+        if(raceSelector && CanMove)
+            UpdateRotation(Direction);
         raceSelector?.SetAnimationSpeed(movable.CurrentSpeed.magnitude);
         if(invulnerable){
             timer -= Time.deltaTime;
@@ -151,12 +159,13 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         if(raceSelector){
             raceSelector.onExecuteAttack.AddListener(Attack);
             raceSelector.onFinishedAttack.AddListener(EndAttack);
+            raceSelector.CallUpdateCenter();
         }
     }
 
-    void CallUpdateHealth()
+    protected void CallUpdateHealth()
     {
-        float hpPercentage = MaxHP / (1.0f * CurHP);
+        float hpPercentage = CurHP / (1.0f * MaxHP);
         if(OnHealthChange != null)
             OnHealthChange(hpPercentage);
     }

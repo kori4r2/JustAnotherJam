@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class CameraControl : MonoBehaviour
 {
     [SerializeField, Range(0f, 5f)] private float cameraMoveDuration = 1.5f;
+    [SerializeField, Range(0f, 50f)] private float xOffset = 0f;
     private bool moving = false;
     private Vector3 targetPosition = Vector3.zero;
     private Vector3 previousPosition = Vector3.zero;
@@ -19,12 +20,21 @@ public class CameraControl : MonoBehaviour
         navigator.Camera = this;
     }
 
-    public void MoveToRoom(Room room){
+    public void MoveToRoom(Room room, bool now = false){
         if(!moving && room != null){
-            targetPosition = new Vector3(room.Position.x, room.Position.y, transform.position.z);
-            previousPosition = transform.position;
-            moving = true;
-            timeElapsed = 0f;
+            targetPosition = new Vector3(room.Position.x - xOffset, room.Position.y, transform.position.z);
+            if(now){
+                previousPosition = targetPosition;
+                moving = false;
+                timeElapsed = 0f;
+                transform.position = targetPosition;
+                OnArrive.Invoke();
+                OnArrive.RemoveAllListeners();
+            }else{
+                previousPosition = transform.position;
+                moving = true;
+                timeElapsed = 0f;
+            }
         }
     }
 

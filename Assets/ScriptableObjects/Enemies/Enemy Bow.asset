@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19de377c40704748942e8bd686e9aa6, type: 3}
   m_Name: Enemy Bow
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3999376536003356104, guid: ac0f93cd7afae1d43875d8b3997217ba, type: 3}
+  prefab: {fileID: 4971371056601323003, guid: 4ab21ad54038805409ca75c65b5c206a, type: 3}
   spawnPosition: {x: 0, y: 0}

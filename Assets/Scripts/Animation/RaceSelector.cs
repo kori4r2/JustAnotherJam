@@ -77,7 +77,7 @@ public class RaceSelector : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
         
         defaultPositionY = modelTransform.localPosition.y;
-        Debug.Log(defaultBonePositionY);
+        // Debug.Log(defaultBonePositionY);
 
         foreach (var item in partsReferences)
         {
@@ -177,19 +177,19 @@ public class RaceSelector : MonoBehaviour
     {
         if(onExecuteAttack != null)
             onExecuteAttack.Invoke();
-        Debug.Log("Execute");
+        // Debug.Log("Execute");
     }
 
     public void CallFinishAttack()
     {
         if(onFinishedAttack != null)
             onFinishedAttack.Invoke();
-        Debug.Log("Finish");
+        // Debug.Log("Finish");
     }
 
     Coroutine updateCoroutine = null;
     //Move the model so that the center of the character is at local 0
-    private void CallUpdateCenter()
+    public void CallUpdateCenter()
     {
         if(updateCoroutine != null)
             StopCoroutine(updateCoroutine);

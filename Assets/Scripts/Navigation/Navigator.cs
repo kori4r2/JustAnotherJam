@@ -26,6 +26,7 @@ public class Navigator : ScriptableObject
 
     public void Restart(){
         rooms = new Dictionary<int, Room>();
+        roomsReadOnly = null;
         navigating = false;
     }
 

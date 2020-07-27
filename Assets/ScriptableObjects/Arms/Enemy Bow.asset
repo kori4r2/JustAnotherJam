@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094742154b8b02e488f35972d4b9e06b, type: 3}
   m_Name: Enemy Bow
   m_EditorClassIdentifier: 
-  racialTrait: 1
-  damagePrefab: {fileID: 4079294270081440509, guid: 3e602633a8af4ad49909bc0f975ccba3,
+  racialTrait: 2
+  damagePrefab: {fileID: 4079294270081440509, guid: 7a963291317698944a071b358b6e213c,
     type: 3}
   idealRange: 7

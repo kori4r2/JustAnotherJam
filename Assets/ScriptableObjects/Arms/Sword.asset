@@ -15,3 +15,4 @@ MonoBehaviour:
   racialTrait: 1
   damagePrefab: {fileID: 4079294270081440509, guid: 86f272ed80bccea49b4f6a3403c8fdbb,
     type: 3}
+  idealRange: 2

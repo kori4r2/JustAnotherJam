@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98654154940930260}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.64, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: -0.8, z: 0}
+  m_LocalScale: {x: 2, y: 2.5, z: 2}
   m_Children: []
   m_Father: {fileID: 4079294270081440508}
   m_RootOrder: 0
@@ -67,9 +67,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: dfc4cb8638065c74d8b2940b6e161cad, type: 3}
-  m_Color: {r: 0.4481132, g: 1, b: 0.9859499, a: 0.78431374}
+  m_Color: {r: 0.78431374, g: 0, b: 0, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4079294270081440509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2015116303831046592}
@@ -127,7 +127,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 0, y: -0.64}
+  m_Offset: {x: 0, y: -0.8}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -138,7 +138,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1.28, y: 1.6}
   m_EdgeRadius: 0
 --- !u!50 &1871719901458202673
 Rigidbody2D:
@@ -186,15 +186,15 @@ CompositeCollider2D:
       - X: -6400000
         Y: 0
       - X: -6400000
-        Y: -12800000
+        Y: -16000000
       - X: 6400000
-        Y: -12800000
+        Y: -16000000
   m_CompositePaths:
     m_Paths:
     - - {x: 0.64, y: 0}
       - {x: -0.64, y: 0}
-      - {x: -0.64, y: -1.28}
-      - {x: 0.64, y: -1.28}
+      - {x: -0.64, y: -1.6}
+      - {x: 0.64, y: -1.6}
   m_VertexDistance: 0.0005
 --- !u!114 &1630703286856684178
 MonoBehaviour:

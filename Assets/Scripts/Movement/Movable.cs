@@ -68,11 +68,15 @@ public class Movable : MonoBehaviour {
 			if(Mathf.Abs(rigid2D.velocity.x) - Mathf.Abs(rigid2D.velocity.y) > Mathf.Epsilon){
 				anim.SetFloat("directionY", 0f);
 				anim.SetFloat("directionX", rigid2D.velocity.normalized.x);
-				Direction = new Vector2((rigid2D.velocity.x > float.Epsilon)? 1 : (rigid2D.velocity.x < -float.Epsilon)? -1 : 0 , 0);
+				if(CanMove){
+					Direction = new Vector2((rigid2D.velocity.x > float.Epsilon)? 1 : (rigid2D.velocity.x < -float.Epsilon)? -1 : 0 , 0);
+				}
 			}else if(Mathf.Abs(rigid2D.velocity.y) - Mathf.Abs(rigid2D.velocity.x) > Mathf.Epsilon){
 				anim.SetFloat("directionX", 0f);
 				anim.SetFloat("directionY", rigid2D.velocity.normalized.y);
-				Direction = new Vector2(0, (rigid2D.velocity.y > float.Epsilon)? 1 : (rigid2D.velocity.y < -float.Epsilon)? -1 : 0);
+				if(CanMove){
+					Direction = new Vector2(0, (rigid2D.velocity.y > float.Epsilon)? 1 : (rigid2D.velocity.y < -float.Epsilon)? -1 : 0);
+				}
 			}
 		}
 	}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Animator))]
 public class DoorTrigger : MonoBehaviour
 {
     [SerializeField] private Transform entrance = null;
@@ -24,11 +25,23 @@ public class DoorTrigger : MonoBehaviour
         }
     }
 
-    public bool isOpen = false;
+    private bool isOpen = false;
+    public bool IsOpen{
+        get => isOpen;
+        set{
+            isOpen = value;
+            anim.SetBool("Open", isOpen);
+        }
+    }
     private bool exiting = false;
     private bool entering = false;
+    private Animator anim;
     private UnityEvent PlayerExited = null;
     private UnityEvent PlayerEntered = null;
+
+    void Awake(){
+        anim = GetComponent<Animator>();
+    }
 
     public void SetCallbacks(UnityEvent enterEvent, UnityEvent exitEvent){
         if(PlayerEntered == null) PlayerEntered = enterEvent;
