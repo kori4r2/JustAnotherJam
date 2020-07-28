@@ -71,7 +71,7 @@ public class AttackTrigger : MonoBehaviour
     void OnTriggerExit2D(Collider2D other){
         if(other.gameObject.tag != unit.gameObject.tag){
             IDamageable target = other.GetComponent<IDamageable>();
-            if(target != null && !targets.Contains(target)){
+            if(target != null && targets.Contains(target)){
                 targets.Remove(target);
             }
         }
