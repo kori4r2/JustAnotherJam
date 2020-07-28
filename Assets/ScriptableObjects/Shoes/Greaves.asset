@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Greaves
   m_EditorClassIdentifier: 
   racialTrait: 3
+  speedModifier: 0.5
+  attackSpeedModifier: 0.75
