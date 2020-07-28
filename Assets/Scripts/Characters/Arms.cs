@@ -10,8 +10,10 @@ public class Arms : Equipment
     [SerializeField] private float idealRange = 2f;
     public float IdealRange { get => idealRange; }
 
-    public AttackTrigger AddTrigger(Transform parent){
-        GameObject obj = Instantiate(damagePrefab, parent);
-        return obj.GetComponent<AttackTrigger>();
+    public AttackTrigger AddTrigger(UnitController attacker){
+        GameObject obj = Instantiate(damagePrefab, attacker.transform);
+        AttackTrigger trigger = obj.GetComponent<AttackTrigger>();
+        trigger.Unit = attacker;
+        return trigger;
     }
 }

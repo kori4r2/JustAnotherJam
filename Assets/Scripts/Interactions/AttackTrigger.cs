@@ -9,6 +9,7 @@ public class AttackTrigger : MonoBehaviour
     private SpriteRenderer sr = null;
     private List<Collider2D> colliders = new List<Collider2D>();
     private UnitController unit = null;
+    public UnitController Unit { get => unit; set => unit = (unit == null)? value : unit; }
     private bool attacking = false;
     private List<IDamageable> targets = new List<IDamageable>();
     // Start is called before the first frame update
@@ -31,13 +32,14 @@ public class AttackTrigger : MonoBehaviour
         }
     }
 
-    public void PrepareAttack(UnitController thisUnit){
-        attacking = true;
+    public void PrepareAttack(){
         if(sr != null){
             sr.enabled = true;
         }
-        unit = thisUnit;
-        UpdateRotation(unit.Direction);
+        if(unit != null){
+            attacking = true;
+            UpdateRotation(unit.Direction);
+        }
     }
 
     public void Attack(){
@@ -47,7 +49,6 @@ public class AttackTrigger : MonoBehaviour
                     target.TakeDamage(unit);
                 }
             }
-            unit = null;
         }
     }
 
@@ -56,10 +57,11 @@ public class AttackTrigger : MonoBehaviour
         if(sr != null){
             sr.enabled = false;
         }
-        this.unit = null;
     }
 
     void OnTriggerEnter2D(Collider2D other){
+        if(unit == null) return;
+
         if(other.gameObject.tag != unit.gameObject.tag){
             IDamageable target = other.GetComponent<IDamageable>();
             if(target != null && !targets.Contains(target)){
@@ -69,6 +71,8 @@ public class AttackTrigger : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D other){
+        if(unit == null) return;
+
         if(other.gameObject.tag != unit.gameObject.tag){
             IDamageable target = other.GetComponent<IDamageable>();
             if(target != null && targets.Contains(target)){

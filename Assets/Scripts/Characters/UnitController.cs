@@ -65,7 +65,7 @@ public abstract class UnitController : MonoBehaviour, IDamageable
         if(atkTrigger != null){
             Destroy(atkTrigger.gameObject);
         }
-        atkTrigger = arms.AddTrigger(transform);
+        atkTrigger = arms.AddTrigger(this);
     }
 
     protected virtual void EquipShoes(Shoes newShoes){
@@ -97,7 +97,7 @@ public abstract class UnitController : MonoBehaviour, IDamageable
     protected void StartAttack(){
         if(CanMove){
             CanMove = false;
-            atkTrigger?.PrepareAttack(this);
+            atkTrigger?.PrepareAttack();
             raceSelector?.StartAttackAnimation();
         }
     }
