@@ -62,5 +62,6 @@ public class Door : RoomObject
         base.Enable();
         // Fecha a porta sempre que entra na sala
         trigger.IsOpen = false;
+        Debug.Log("Enable " + this.name);
     }
 }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1943104034825171957}
   - component: {fileID: 1943104034825171952}
   - component: {fileID: 3305488281383769624}
-  - component: {fileID: 5039024162529752510}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -78,6 +77,9 @@ MonoBehaviour:
   entrance: {fileID: 1943104035174433100}
   exit: {fileID: 1943104035110641600}
   position: 0
+  doorRenderer: {fileID: 3305488281383769624}
+  openDoorSprite: {fileID: 0}
+  closedDoorSprite: {fileID: 21300052, guid: ec236e5ce1723464ea7b929640799b0f, type: 3}
 --- !u!212 &3305488281383769624
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -114,8 +116,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300058, guid: ec236e5ce1723464ea7b929640799b0f, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300052, guid: ec236e5ce1723464ea7b929640799b0f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,25 +128,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5039024162529752510
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943104034825171956}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0a30197895e1834183d9603359b0572, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1943104035110641607
 GameObject:
   m_ObjectHideFlags: 0

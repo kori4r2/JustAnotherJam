@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum DoorPosition{
     North,
@@ -25,6 +26,8 @@ public class Room : ScriptableObject
     public int ID { get => id; set => id = (id == -1)? value : id; }
     public bool Cleared { get; private set; } = false;
     public Vector3 Position { get => roomObj?.transform.position ?? Vector3.zero; }
+    public UnityEvent PlayerExited { get; private set; } = new UnityEvent();
+    public UnityEvent PlayerEntered { get; private set; } = new UnityEvent();
     private float openingDelay = 1.0f;
     private bool loadedEnemies = false;
     private int killableCount = 0;
@@ -64,6 +67,8 @@ public class Room : ScriptableObject
                 door.Navigator = navigator;
                 door.Position = DoorPosition.North;
                 door.PlayerEntered.AddListener(SpawnEnemies);
+                door.PlayerEntered.AddListener(CallOnEnter);
+                door.PlayerExited.AddListener(CallOnExit);
                 door.MyRoom = this;
             }
         }
@@ -77,6 +82,8 @@ public class Room : ScriptableObject
                 door.Navigator = navigator;
                 door.Position = DoorPosition.South;
                 door.PlayerEntered.AddListener(SpawnEnemies);
+                door.PlayerEntered.AddListener(CallOnEnter);
+                door.PlayerExited.AddListener(CallOnExit);
                 door.MyRoom = this;
             }
         }
@@ -90,6 +97,8 @@ public class Room : ScriptableObject
                 door.Navigator = navigator;
                 door.Position = DoorPosition.East;
                 door.PlayerEntered.AddListener(SpawnEnemies);
+                door.PlayerEntered.AddListener(CallOnEnter);
+                door.PlayerExited.AddListener(CallOnExit);
                 door.MyRoom = this;
             }
         }
@@ -103,6 +112,8 @@ public class Room : ScriptableObject
                 door.Navigator = navigator;
                 door.Position = DoorPosition.West;
                 door.PlayerEntered.AddListener(SpawnEnemies);
+                door.PlayerEntered.AddListener(CallOnEnter);
+                door.PlayerExited.AddListener(CallOnExit);
                 door.MyRoom = this;
             }
         }
@@ -204,5 +215,15 @@ public class Room : ScriptableObject
         }else if(Cleared){
             OpenDoors();
         }
+    }
+
+    private void CallOnEnter()
+    {
+        PlayerEntered?.Invoke();
+    }
+
+    private void CallOnExit()
+    {
+        PlayerExited?.Invoke();
     }
 }

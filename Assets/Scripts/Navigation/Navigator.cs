@@ -40,6 +40,7 @@ public class Navigator : ScriptableObject
             rooms[0].OpenDoors();
             navigating = true;
             // Começa a "cutscene" na primeira sala?
+            TimeTracking.instance?.OnNavigatorReady(this);
         }
     }
 

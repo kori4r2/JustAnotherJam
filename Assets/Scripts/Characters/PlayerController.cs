@@ -84,7 +84,7 @@ public class PlayerController : UnitController
         UpdateRace();
     }
 
-    public void ForceDie(){
+    public void ForceDie(bool wonGame = false){
         invulnerable = true;
         timer = float.MaxValue;
         CanMove = false;
@@ -93,6 +93,10 @@ public class PlayerController : UnitController
             Destroy(atkTrigger.gameObject);
         }
         StartCoroutine(DelayStartGame());
+        if(wonGame)
+        {
+            TimeTracking.instance?.FinishGame();
+        }
     }
 
     protected override void Die(){
