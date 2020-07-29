@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a5d4f78c5c7494abde917a220ec80f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invulnerableTime: 1
+  invulnerableTime: 0.25
   raceSelector: {fileID: 6414189327571838826}
   armor: {fileID: 11400000, guid: ec2ee9b344aa28041b26b7e2a70bfc44, type: 2}
   arms: {fileID: 11400000, guid: 7522cc6f5bc62be4ab4666e75684f4f9, type: 2}
@@ -320,6 +320,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4408001371545941252, guid: 67fe8a4dc63b74e418fb97dfb9287617,
+        type: 3}
+      propertyPath: partsReferences.Array.data[2].weapon
+      value: 
+      objectReference: {fileID: 8711050088033396756}
+    - target: {fileID: 4408001371545941252, guid: 67fe8a4dc63b74e418fb97dfb9287617,
+        type: 3}
+      propertyPath: partsReferences.Array.data[2].bodyPart
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2075111833579120192, guid: 67fe8a4dc63b74e418fb97dfb9287617,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -355,3 +365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938b3d354006f2e41918dec252edc823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8711050088033396756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2075111833579485818, guid: 67fe8a4dc63b74e418fb97dfb9287617,
+    type: 3}
+  m_PrefabInstance: {fileID: 7219158951083594350}
+  m_PrefabAsset: {fileID: 0}
