@@ -52,12 +52,8 @@ public class AttackTrigger : MonoBehaviour
         if(unit != null && attacking){
             Collider2D[] hits = new Collider2D[10];
             composite.OverlapCollider(filter, hits);
-            int i = 0;
             foreach(Collider2D hit in hits){
-                if(hit != null){
-                    Debug.Log(i + ": " +hit.gameObject);
-                    i++;
-                }
+                if(hit == null) break;
                 if(hit != null && hit.gameObject.tag != unit.gameObject.tag){
                     IDamageable target = hit.GetComponent<IDamageable>();
                     if(target != null){

@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a5d4f78c5c7494abde917a220ec80f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invulnerableTime: 1
+  invulnerableTime: 0.25
   raceSelector: {fileID: 2461807461078616572}
   armor: {fileID: 11400000, guid: ec2ee9b344aa28041b26b7e2a70bfc44, type: 2}
   arms: {fileID: 11400000, guid: 6834741c312aaee4096133cf7249ece7, type: 2}
