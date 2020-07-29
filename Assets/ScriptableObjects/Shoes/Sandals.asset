@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Sandals
   m_EditorClassIdentifier: 
   racialTrait: 2
+  speedModifier: 1.5
+  attackSpeedModifier: 2

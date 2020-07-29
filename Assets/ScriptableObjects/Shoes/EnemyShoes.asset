@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ee66767baebeb4fbdf60f8bb3a9770, type: 3}
   m_Name: EnemyShoes
   m_EditorClassIdentifier: 
-  racialTrait: 0
-  speedModifier: 1
+  racialTrait: 1
+  speedModifier: 0.3
   attackSpeedModifier: 1

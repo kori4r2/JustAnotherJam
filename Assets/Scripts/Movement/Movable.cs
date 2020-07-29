@@ -62,18 +62,18 @@ public class Movable : MonoBehaviour {
 			rigid2D.velocity = moveSpeed * direction;
 		}
 		if (anim != null) {
-			anim.SetBool("moving", rigid2D.velocity != Vector2.zero);
-			anim.SetFloat("moveX", rigid2D.velocity.normalized.x);
-			anim.SetFloat("moveY", rigid2D.velocity.normalized.y);
+			// anim.SetBool("moving", rigid2D.velocity != Vector2.zero);
+			// anim.SetFloat("moveX", rigid2D.velocity.normalized.x);
+			// anim.SetFloat("moveY", rigid2D.velocity.normalized.y);
 			if(Mathf.Abs(rigid2D.velocity.x) - Mathf.Abs(rigid2D.velocity.y) > Mathf.Epsilon){
-				anim.SetFloat("directionY", 0f);
-				anim.SetFloat("directionX", rigid2D.velocity.normalized.x);
+				// anim.SetFloat("directionY", 0f);
+				// anim.SetFloat("directionX", rigid2D.velocity.normalized.x);
 				if(CanMove){
 					Direction = new Vector2((rigid2D.velocity.x > float.Epsilon)? 1 : (rigid2D.velocity.x < -float.Epsilon)? -1 : 0 , 0);
 				}
 			}else if(Mathf.Abs(rigid2D.velocity.y) - Mathf.Abs(rigid2D.velocity.x) > Mathf.Epsilon){
-				anim.SetFloat("directionX", 0f);
-				anim.SetFloat("directionY", rigid2D.velocity.normalized.y);
+				// anim.SetFloat("directionX", 0f);
+				// anim.SetFloat("directionY", rigid2D.velocity.normalized.y);
 				if(CanMove){
 					Direction = new Vector2(0, (rigid2D.velocity.y > float.Epsilon)? 1 : (rigid2D.velocity.y < -float.Epsilon)? -1 : 0);
 				}

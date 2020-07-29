@@ -13,7 +13,7 @@ public class Trap : MonoBehaviour
     }
 
     public void KillPlayer(){
-        player.ForceDie();
+        player.ForceDie(true);
     }
 
     public void OnTriggerEnter2D(Collider2D other){
