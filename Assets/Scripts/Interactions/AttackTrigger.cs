@@ -8,10 +8,11 @@ public class AttackTrigger : MonoBehaviour
     [SerializeField]
     private SpriteRenderer sr = null;
     private List<Collider2D> colliders = new List<Collider2D>();
+    private CompositeCollider2D composite = null;
+    ContactFilter2D filter = new ContactFilter2D();
     private UnitController unit = null;
     public UnitController Unit { get => unit; set => unit = (unit == null)? value : unit; }
     private bool attacking = false;
-    private List<IDamageable> targets = new List<IDamageable>();
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,7 +21,12 @@ public class AttackTrigger : MonoBehaviour
             sr.enabled = false;
         }
         colliders.AddRange(GetComponents<Collider2D>());
-        colliders.Remove(GetComponent<CompositeCollider2D>());
+        composite = GetComponent<CompositeCollider2D>();
+        colliders.Remove(composite);
+
+        filter = new ContactFilter2D();
+        filter.NoFilter();
+
         SetColliderState(true);
         attacking = false;
     }
@@ -39,13 +45,24 @@ public class AttackTrigger : MonoBehaviour
         if(unit != null){
             attacking = true;
         }
+        UpdateRotation(unit.Direction);
     }
 
     public void Attack(){
         if(unit != null && attacking){
-            foreach(IDamageable target in targets.ToArray()){
-                if(target != null){
-                    target.TakeDamage(unit);
+            Collider2D[] hits = new Collider2D[10];
+            composite.OverlapCollider(filter, hits);
+            int i = 0;
+            foreach(Collider2D hit in hits){
+                if(hit != null){
+                    Debug.Log(i + ": " +hit.gameObject);
+                    i++;
+                }
+                if(hit != null && hit.gameObject.tag != unit.gameObject.tag){
+                    IDamageable target = hit.GetComponent<IDamageable>();
+                    if(target != null){
+                        target.TakeDamage(unit);
+                    }
                 }
             }
         }
@@ -58,28 +75,6 @@ public class AttackTrigger : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other){
-        if(unit == null) return;
-
-        if(other.gameObject.tag != unit.gameObject.tag){
-            IDamageable target = other.GetComponent<IDamageable>();
-            if(target != null && !targets.Contains(target)){
-                targets.Add(target);
-            }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other){
-        if(unit == null) return;
-
-        if(other.gameObject.tag != unit.gameObject.tag){
-            IDamageable target = other.GetComponent<IDamageable>();
-            if(target != null && targets.Contains(target)){
-                targets.Remove(target);
-            }
-        }
-    }
-
     private void UpdateRotation(Vector2 direction){
         if(direction == Vector2.down){
             transform.rotation = Quaternion.identity;
@@ -89,12 +84,6 @@ public class AttackTrigger : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(-90f, Vector3.back);
         }else if(direction == Vector2.left){
             transform.rotation = Quaternion.AngleAxis(90f, Vector3.back);
-        }
-    }
-
-    void Update(){
-        if(unit != null){
-            UpdateRotation(unit.Direction);
         }
     }
 }
