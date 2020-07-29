@@ -38,13 +38,12 @@ public class AttackTrigger : MonoBehaviour
         }
         if(unit != null){
             attacking = true;
-            UpdateRotation(unit.Direction);
         }
     }
 
     public void Attack(){
         if(unit != null && attacking){
-            foreach(IDamageable target in targets){
+            foreach(IDamageable target in targets.ToArray()){
                 if(target != null){
                     target.TakeDamage(unit);
                 }
@@ -90,6 +89,12 @@ public class AttackTrigger : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(-90f, Vector3.back);
         }else if(direction == Vector2.left){
             transform.rotation = Quaternion.AngleAxis(90f, Vector3.back);
+        }
+    }
+
+    void Update(){
+        if(unit != null){
+            UpdateRotation(unit.Direction);
         }
     }
 }
